@@ -1,15 +1,10 @@
 import { createPortal } from "react-dom";
 import { useEffect } from "react";
 import css from "./MovieModal.module.css";
+import type { Movie } from "../../types/movie";
 
 interface MovieModalProps {
-  movie: {
-    title: string;
-    overview: string;
-    release_date: string;
-    vote_average: number;
-    backdrop_path: string;
-  };
+  movie: Movie;
   onClose: () => void;
 }
 
@@ -20,11 +15,11 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
         onClose();
       }
     };
-    window.addEventListener("keydown", handleEsc);
-    document.body.style.overflow = "hidden"; // Prevent background scrolling when modal is open
+    document.addEventListener("keydown", handleEsc);
+    document.body.style.overflow = "hidden"; 
     return () => {
-      window.removeEventListener("keydown", handleEsc);
-      document.body.style.overflow = ""; // Restore background scrolling when modal is closed
+      document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = ""; 
     };
   }, [onClose]);
 

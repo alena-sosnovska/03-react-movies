@@ -35,15 +35,21 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      <SearchBar handleSearch={handleSearch} disabled={isLoading} />
+      <SearchBar onSubmit={handleSearch} disabled={isLoading} />
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
       {movies.length > 0 && (
-        <MovieGrid movies={movies} onSelect={(movie) => setSelectedMovie(movie)} />
-          )}
-        {selectedMovie && (
-          <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
-        )}
+        <MovieGrid
+          movies={movies}
+          onSelect={(movie) => setSelectedMovie(movie)}
+        />
+      )}
+      {selectedMovie && (
+        <MovieModal
+          movie={selectedMovie}
+          onClose={() => setSelectedMovie(null)}
+        />
+      )}
     </div>
   );
 };
